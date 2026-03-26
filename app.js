@@ -8,10 +8,14 @@ const server=http.createServer(app)
 const io=socketio(server)
 
 app.set("view engine", "ejs")
-app.set(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "public")))
+
+io.on("connection", (socket)=>{
+    console.log("connected")
+});
 
 app.get("/", (req, res)=>{
-    res.send("server running")
+    res.render("index")
 })
 
 server.listen(3000);
